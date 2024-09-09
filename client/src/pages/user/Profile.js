@@ -41,6 +41,7 @@ const Profile = () => {
         let ls = localStorage.getItem("auth");
         ls = JSON.parse(ls);
         ls.user = data.updatedUser;
+        console.log(ls.user);
         localStorage.setItem("auth", JSON.stringify(ls));
         toast.success("Profile Updated Successfully");
       }
