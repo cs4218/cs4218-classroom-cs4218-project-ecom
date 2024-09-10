@@ -1,20 +1,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Orders from "../pages/user/Orders";
+import Orders from "./Orders";
 import axios from "axios";
-import { useAuth } from "../context/auth";
+import { useAuth } from "../../context/auth";
 import "@testing-library/jest-dom";
 
 jest.mock("axios");
 
-jest.mock("../context/auth", () => ({
+jest.mock("../../context/auth", () => ({
   useAuth: jest.fn(() => [null, jest.fn()]),
 }));
 
-jest.mock("../components/Layout", () => ({ children }) => (
+jest.mock("../../components/Layout", () => ({ children }) => (
   <div>{children}</div>
 ));
-jest.mock("../components/UserMenu", () => () => <div>User Menu</div>);
+jest.mock("../../components/UserMenu", () => () => <div>User Menu</div>);
 
 describe("Orders Component", () => {
   it("should render the orders from the API", async () => {

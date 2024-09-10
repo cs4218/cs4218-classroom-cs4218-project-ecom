@@ -1,17 +1,17 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { useAuth } from "../context/auth";
-import Dashboard from "../pages/user/Dashboard";
+import { useAuth } from "../../context/auth";
+import Dashboard from "./Dashboard";
 import "@testing-library/jest-dom";
 
-jest.mock("../context/auth", () => ({
+jest.mock("../../context/auth", () => ({
   useAuth: jest.fn(() => [null, jest.fn()]),
 }));
 
-jest.mock("../components/Layout", () => ({ children }) => (
+jest.mock("../../components/Layout", () => ({ children }) => (
   <div>{children}</div>
 ));
-jest.mock("../components/UserMenu", () => () => <div>User Menu</div>);
+jest.mock("../../components/UserMenu", () => () => <div>User Menu</div>);
 
 describe("Dashboard Component", () => {
   it("should render the Dashboard with user information", () => {

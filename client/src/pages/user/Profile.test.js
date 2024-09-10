@@ -1,13 +1,13 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Profile from "../pages/user/Profile";
-import { useAuth } from "../context/auth";
+import Profile from "./Profile";
+import { useAuth } from "../../context/auth";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import toast from "react-hot-toast";
 import { BrowserRouter as Router } from "react-router-dom";
 
-jest.mock("../context/auth", () => ({
+jest.mock("../../context/auth", () => ({
   useAuth: jest.fn(() => [
     {
       user: {
@@ -21,7 +21,7 @@ jest.mock("../context/auth", () => ({
   ]),
 }));
 
-jest.mock("../context/cart", () => ({
+jest.mock("../../context/cart", () => ({
   useCart: jest.fn(() => [null, jest.fn()]),
 }));
 
@@ -30,7 +30,7 @@ jest.mock("react-hot-toast", () => ({
   error: jest.fn(),
 }));
 
-jest.mock("../components/Layout", () => ({ children }) => (
+jest.mock("../../components/Layout", () => ({ children }) => (
   <div>{children}</div>
 ));
 
