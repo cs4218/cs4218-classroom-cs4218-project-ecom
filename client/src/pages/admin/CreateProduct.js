@@ -78,12 +78,13 @@ const CreateProduct = () => {
                 size="large"
                 showSearch
                 className="form-select mb-3"
+                data-testid="category-select"  
                 onChange={(value) => {
                   setCategory(value);
                 }}
               >
                 {categories?.map((c) => (
-                  <Option key={c._id} value={c._id}>
+                  <Option key={c._id} value={c._id} data-testid="category-items">
                     {c.name}
                   </Option>
                 ))}
@@ -156,6 +157,7 @@ const CreateProduct = () => {
                   size="large"
                   showSearch
                   className="form-select mb-3"
+                  data-testid="shipping-select"  
                   onChange={(value) => {
                     setShipping(value);
                   }}
