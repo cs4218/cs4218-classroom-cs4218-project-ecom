@@ -1,0 +1,66 @@
+name: Node.js CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - branch-unit-test-home-page
+      - branch-unit-tests-admin
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install frontend dependencies
+        run: npm install --prefix ./client
+
+      # Step 4: Build the project
+      - name: Build project
+        run: echo "Build project here"
+
+  # Job 2: Test Job
+  test:
+    runs-on: ubuntu-latest
+    needs: build 
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install frontend dependencies
+        run: npm install --prefix ./client
+
+      # Step 4: Set up environment variables from GitHub Secrets
+      - name: Setup environment variables
+        run: |
+          echo "NODE_ENV=test" >> $GITHUB_ENV
+          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+      # Step 5: Run tests
+      - name: Run tests
+        run: npm test -- --testPathIgnorePatterns="tests"
